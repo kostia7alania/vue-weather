@@ -5,13 +5,14 @@ Vue.use(Router);
 
 export default new Router({
     routes: [{
+            name: 'Home',
             path: "/",
             ///component: () => import("@/components/WeatherApp"),
         },
         {
-            name: "Custom",
-            path: "/Custom",
-            component: () => import("@/components/CityApp")
+            name: "Favorites",
+            path: "/Favorites",
+            component: () => import("@/components/Favorites")
         }
     ]
 });
