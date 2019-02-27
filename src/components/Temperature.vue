@@ -3,7 +3,7 @@
     <div class="temperature__value">{{ (celsius)? value : fValue }}</div>
     <div class="temperature__right">
       <div class="temperature__scale">
-        <a href="#" @click.prevent="celsiusToggle">&deg;{{ celsius?'C':'F' }}</a>
+        <a href="#" @click.prevent="celsiusToggle" v-tooltip="`To ${!celsius?'celsius':'fahrenheit'}`">&deg;{{ celsius?'C':'F' }}</a>
       </div>
       <div class="temperature__high">
         <img src="../assets/icons/high.svg" alt="high temperature">
@@ -19,53 +19,19 @@
 
 <script>
 export default {
-  name: "Temperature",
-
-  props: {
-    value: {
-      type: Number,
-      required: true
-    },
-    high: {
-      type: Number,
-      required: true
-    },
-    low: {
-      type: Number,
-      required: true
-    }
-  },
-
-  data: function() {
-    return {
-      scale: "Celcius"
-    };
-  },
-
+  name: "Temperature",  
   computed: { 
-    celsius() {
-      return this.$store.state.celsius;
-    },
-    fValue() {
-      return this.toFahrenheit(this.value);
-    },
-
-    fHigh() {
-      return this.toFahrenheit(this.high);
-    },
-
-    fLow() {
-      return this.toFahrenheit(this.low);
-    }
+    value() { return this.$store.state.temperature.value},
+    high() { return this.$store.state.temperature.high},
+    low() { return   this.$store.state.temperature.low},
+    celsius() { return this.$store.state.celsius; },
+    fValue() { return this.toFahrenheit(this.value); }, 
+    fHigh() { return this.toFahrenheit(this.high); },
+    fLow() { return this.toFahrenheit(this.low); }
   },
-
   methods: {
-    toFahrenheit(value) {
-      return Math.floor(value * 1.8 + 32);
-    },
-    celsiusToggle() {
-      this.$store.commit("toggle", { prop: "celsius" });
-    }
+    toFahrenheit(value) { return Math.floor(value * 1.8 + 32); },
+    celsiusToggle() { this.$store.commit("toggle", { prop: "celsius" }); }
   }
 };
 </script>

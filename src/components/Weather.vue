@@ -9,21 +9,11 @@
 <script>
 export default {
     name: 'Weather',
-
-    props: {
-        location: {
-            type: String,
-            required: true
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        icon: {
-            type: String,
-            required: true
-        }
-    }
+    computed: {
+        icon() { return this.$store.state.weather.icon },
+        description() { return this.$store.state.weather.description },
+        location() { return this.$store.state.weather.location }
+    } 
 }
 </script>
 

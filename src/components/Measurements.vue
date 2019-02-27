@@ -15,21 +15,13 @@
 <script>
 export default {
     name: 'Measurements',
-    props: {
-        cloudiness: {
-            type: Number,
-            required: true
-        },
-        windSpeed: {
-            type: Number,
-            required: true
-        },
-        humidity: {
-            type: Number,
-            required: true
-        }
+    computed: {
+        cloudiness() { return this.$store.state.measurements.cloudiness },
+        windSpeed()  { return this.$store.state.measurements.windSpeed  },
+        humidity()   { return this.$store.state.measurements.humidity   },
     }
 }
+
 </script>
 
 <style scoped>
