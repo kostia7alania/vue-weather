@@ -7,6 +7,8 @@
     </div>
   </div>
 </template>
+
+
 <script>
 
 import WeatherApp from './components/WeatherApp'
@@ -19,12 +21,14 @@ export default {
     AppCredits
   }, 
   data() {
-    return {
-     
-    }
-  },  
+    return { }
+  },
+  mounted() {
+    this.initVuexStorage();
+  }
 }
 </script>
+
 <style lang="scss">
 @import './assets/global-styles.scss';
 </style>
