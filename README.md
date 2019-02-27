@@ -1,6 +1,6 @@
 # vue-weather
 
-<img src='./preview.jpg'>
+<img src='./preview.JPG'>
 <img src='./preview2.jpg'>
 <img src='./preview3.jpg'>
 
