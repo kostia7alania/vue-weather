@@ -1,5 +1,7 @@
 # vue-weather
 
+<img src='./preview.JPG'>
+
 ## Project setup
 ```
 npm install
