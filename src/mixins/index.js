@@ -27,7 +27,7 @@ export const localDataMixin = {
 
 export const VuexMixin = {
     methods: {
-        initVuexStorage(name) {
+        initVuexStorage() {
             if (localStorage) {
                 console.log('READ')
                 let name = 'VuexStore';
@@ -36,7 +36,6 @@ export const VuexMixin = {
                     Object.keys(local).forEach(key => {
                         console.log(this.$store.state, key, local[key])
                         this.$set(this.$store.state, key, local[key])
-
                     });
                 }
             } else {
