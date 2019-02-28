@@ -14,10 +14,16 @@ export default {
             Vue.$toast.info( "The browser does not support geolocation. We trying to determine you position by ip address!", Vue.getTime(), Vue.alertOptions );
             let url = "http://api.ipstack.com/check?access_key=" + state.tokenIpstack;
             console.log("can`t get geo, try by ip", url); 
+            
+            commit("changeProp", { prop: 'loading', state: true});
+
             axios 
-                  .get(url).then(e =>dispatch('updateForecast',{ coordinates: e.data} ) )
+                  .get(url).then(e => dispatch('updateForecast',{ coordinates: e.data} ) )
                   .catch(err =>{
                       Vue.$toast.info("Can't get your position via ip-checker!", Vue.getTime(), Vue.alertOptions);
+                      
+                      commit("changeProp", { prop: 'loading', state: false});
+
                   });
           }
 
@@ -25,11 +31,14 @@ export default {
             commit("changeProp", { prop: 'positionEnabled', state: true });
             //this.$store.commit("toggle", { prop: "positionEnabled" });
    
-        } else Vue.$toast.info ("Please, connect to Internet!", Vue.getTime(), Vue.alertOptions);
+        } else {
+          Vue.$toast.info ("Please, connect to Internet!", Vue.getTime(), Vue.alertOptions);
+        }
       },
 
       // Обновляем погоду по полученным координатам @param {Object} position - Lat & lon coordinates object.
       async updateForecast({state, commit, dispatch}, coordinates) {
+        commit("changeProp", { prop: 'loading', state: true});
         let data;
         try {
           data = await dispatch('getForecast', coordinates);
@@ -56,7 +65,8 @@ export default {
           };
         }
         dispatch('populate', { data } );
-        Vue.$toast.success( "Weather updated!", Vue.getTime(), Vue.alertOptions ); 
+        Vue.$toast.success( "Weather updated!", Vue.getTime(), Vue.alertOptions );
+        commit("changeProp", { prop: 'loading', state: false});
       },
   
       async getForecast({state, commit, dispatch}, coordinates) {
