@@ -72,7 +72,12 @@ export const globalMixin = {
     },
     methods: {
         getTime() {
-            return `${(new Date).getHours()}:${(new Date).getMinutes()}:${(new Date).getSeconds()}`;
+            let d = new Date;
+            let sec = d.getSeconds();
+            sec = sec<10?'0'+sec:sec;
+            let min = d.getMinutes();
+            min = min<10?'0'+min:min;
+            return `${d.getHours()}:${min}:${sec}`;
         }
     },
     computed: {
