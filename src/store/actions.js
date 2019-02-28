@@ -11,7 +11,7 @@ export default {
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => dispatch('updateForecast', position.coords ) );
           } else {
-            Vue.$toast.info( "The browser does not support geolocation. We trying to determine you position by ip address!", Vue.getTime(), Vue.alertOptions );
+            Vue.$toast.info( "The browser does not support geolocation. We trying to determine you position by ip address!", Vue.getTime());
             let url = "http://api.ipstack.com/check?access_key=" + state.tokenIpstack;
             console.log("can`t get geo, try by ip", url); 
             
@@ -20,7 +20,7 @@ export default {
             axios 
                   .get(url).then(e => dispatch('updateForecast',{ coordinates: e.data} ) )
                   .catch(err =>{
-                      Vue.$toast.info("Can't get your position via ip-checker!", Vue.getTime(), Vue.alertOptions);
+                      Vue.$toast.info("Can't get your position via ip-checker!", Vue.getTime());
                       
                       commit("changeProp", { prop: 'loading', state: false});
 
@@ -32,7 +32,7 @@ export default {
             //this.$store.commit("toggle", { prop: "positionEnabled" });
    
         } else {
-          Vue.$toast.info ("Please, connect to Internet!", Vue.getTime(), Vue.alertOptions);
+          Vue.$toast.info ("Please, connect to Internet!", Vue.getTime());
         }
       },
 
@@ -65,7 +65,7 @@ export default {
           };
         }
         dispatch('populate', { data } );
-        Vue.$toast.success( "Weather updated!", Vue.getTime(), Vue.alertOptions );
+        Vue.$toast.success( "Weather updated!", Vue.getTime() );
         commit("changeProp", { prop: 'loading', state: false});
       },
   

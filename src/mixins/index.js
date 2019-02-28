@@ -43,7 +43,7 @@ export const VuexMixin = {
             }
         },
 
-        setVuexStorage() {
+        setVuex() {
             if (localStorage) {
                 localStorage.setItem('VuexStore', JSON.stringify({
                     ...this.$store.state,
@@ -64,11 +64,7 @@ export const VuexMixin = {
 export const globalMixin = {
     mixins: [localDataMixin, VuexMixin],
     data() {
-        return {
-            alertOptions: {
-                position: "bottomRight"
-            }
-        }
+        return { }
     },
     methods: {
         getTime() {

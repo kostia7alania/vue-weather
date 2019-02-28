@@ -1,29 +1,32 @@
+function setVuexStorage(){ Vue.setVuex() }
+
 export default { 
 
   changeProp (store, {prop, state}) {
     console.log(arguments)
     store[prop] = state;
-    Vue.setVuexStorage();
+    setVuexStorage();
   },
 
   changeObj (store, {obj, prop, state}) {
     console.log(arguments)
     store[obj][prop] = state;
-    Vue.setVuexStorage();
+    setVuexStorage();
   },
 
   toggle (store, {prop}) { 
     store[prop] = !store[prop];
-    Vue.setVuexStorage();
+    setVuexStorage();
   },  
   
   appendToFavorite (store, {prop, state}) {
     Vue.$set(store[prop], state.id, state);
-    Vue.setVuexStorage();
+    setVuexStorage(); 
   },
+  
   setObj (store, {prop, state}) {
     Vue.$set(store, prop, state);
-    Vue.setVuexStorage();
+    setVuexStorage();
   },
 
   deleteCity (store, id) {
