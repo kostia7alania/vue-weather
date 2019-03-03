@@ -11,6 +11,10 @@ import "./assets/styles/tooltip.scss"
 import VTooltip from 'v-tooltip'
 Vue.use(VTooltip)
 
+
+import Vuetify from 'vuetify'; Vue.use(Vuetify);
+import 'vuetify/dist/vuetify.min.css'
+
 import { globalMixin }  from './mixins/';
 Vue.mixin(globalMixin);
 
