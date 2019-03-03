@@ -1,38 +1,39 @@
-function setVuexStorage(){ Vue.setVuex() }
-
-export default { 
-
+const mutations = {
+    setVuex() {
+      if (localStorage) 
+          localStorage.setItem('VuexStore', JSON.stringify({ ...this.state,favorites: {...this.state.favorites}}));
+      else console.warn("localStorage isn't support!")
+  },
   changeProp (store, {prop, state}) {
-    console.log(arguments)
     store[prop] = state;
-    setVuexStorage();
+    this.commit('setVuex');
   },
 
   changeObj (store, {obj, prop, state}) {
-    console.log(arguments)
     store[obj][prop] = state;
-    setVuexStorage();
+    this.commit('setVuex');
   },
 
   toggle (store, {prop}) { 
     store[prop] = !store[prop];
-    setVuexStorage();
+    this.commit('setVuex');
   },  
   
   appendToFavorite (store, {prop, state}) {
-    Vue.$set(store[prop], state.id, state);
-    setVuexStorage(); 
+    this._vm.$set(store[prop], state.id, state);
+    this.commit('setVuex');
   },
   
   setObj (store, {prop, state}) {
-    Vue.$set(store, prop, state);
-    setVuexStorage();
+    this._vm.$set(store, prop, state);
+    this.commit('setVuex');
   },
 
   deleteCity (store, id) {
-    console.log(arguments, store.favorites[id])
     //delete store.favorites[id]
-    Vue.$delete(store.favorites, id);
+    this._vm.$delete(store.favorites, id);
+    this.commit('setVuex');
   },
 }
- 
+
+export default mutations;

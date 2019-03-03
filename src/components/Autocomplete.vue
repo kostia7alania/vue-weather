@@ -60,7 +60,7 @@ export default {
       }
       this.$store.commit("appendToFavorite", { prop: 'favorites', state: state });
     }
-    else  this.$toast.info("The city is already added!!",this.getTime());
+    else  this.$toast.info("The city is already added!!",this.$store.state.getTime());
       
     },
     /**
@@ -76,11 +76,11 @@ export default {
     },
     notFoundHandler(){
       console.log('notFound=>', arguments)
-      this.$toast.error("Please, choose an address from the dropdown list!", this.getTime())
+      this.$toast.error("Please, choose an address from the dropdown list!", this.$store.state.getTime())
     },
     errorHandler() {
       console.log('errorHandler=>', arguments)
-      this.$toast.error("An error has occurred!", this.getTime())
+      this.$toast.error("An error has occurred!", this.$store.state.getTime())
     }
   },
   

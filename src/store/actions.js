@@ -1,17 +1,19 @@
 import axios from 'axios'; 
 
 
-export default {
+const actions = {
     searchCustomWeather({state, commit, dispatch}, coordinates ) {
         dispatch('updateForecast', coordinates)
         commit("changeProp", { prop: 'positionEnabled', state: false });
     }, 
-    getPosition({state, commit, dispatch}) {
+    getPosition({state, commit, dispatch}, that) {
+            window.tt = this;
+            console.log('that=>',this)
          if (navigator.onLine) {
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => dispatch('updateForecast', position.coords ) );
           } else {
-            Vue.$toast.info( "The browser does not support geolocation. We trying to determine you position by ip address!", Vue.getTime());
+            this._vm.$toast.info( "The browser does not support geolocation. We trying to determine you position by ip address!", this.state.getTime());
             let url = "http://api.ipstack.com/check?access_key=" + state.tokenIpstack;
             console.log("can`t get geo, try by ip", url); 
             
@@ -20,7 +22,7 @@ export default {
             axios 
                   .get(url).then(e => dispatch('updateForecast',{ coordinates: e.data} ) )
                   .catch(err =>{
-                      Vue.$toast.info("Can't get your position via ip-checker!", Vue.getTime());
+                    this._vm.$toast.info("Can't get your position via ip-checker!", this.state.getTime());
                       
                       commit("changeProp", { prop: 'loading', state: false});
 
@@ -32,7 +34,7 @@ export default {
             //this.$store.commit("toggle", { prop: "positionEnabled" });
    
         } else {
-          Vue.$toast.info ("Please, connect to Internet!", Vue.getTime());
+          this._vm.$toast.info ("Please, connect to Internet!", this.state.getTime());
         }
       },
 
@@ -65,7 +67,7 @@ export default {
           };
         }
         dispatch('populate', { data } );
-        Vue.$toast.success( "Weather updated!", Vue.getTime() );
+        this._vm.$toast.success( "Weather updated!", this.state.getTime() );
         commit("changeProp", { prop: 'loading', state: false});
       },
   
@@ -121,3 +123,5 @@ export default {
         commit("setObj", { prop: 'weather',     state: weather      });
     }
 }
+
+export default actions;

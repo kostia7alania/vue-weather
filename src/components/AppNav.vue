@@ -46,7 +46,7 @@ export default {
       let offline = { method: "warning", text: "You offline. Please check connection!" };
       let okay = { method: "success", text: "Status: All fine!" };
       let out = this.loading ? loading : !this.online ? offline : okay;
-      this.$toast[out.method](out.text, this.getTime());
+      this.$toast[out.method](out.text, this.$store.state.getTime());
     },
     routeToggle() {
       if (this.$router.history.current.name == "Favorites") {

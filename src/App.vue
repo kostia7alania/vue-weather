@@ -35,7 +35,13 @@ export default {
   }
 };
 </script>
-
 <style lang="scss">
-@import "./assets/global-styles.scss";
+ 
+.app--day  { ;background: linear-gradient(to bottom right, #6CB9C8, #6CB9C8) no-repeat; background-color: #6CB9C8;}
+.app--night{background: linear-gradient(to bottom right, #484F60, #484F60) no-repeat; background-color: #484F60;}
+.app--day a:hover  {color: rgba(46, 146, 167, 0.9);}
+.app--night a:hover{color: rgba(0, 0, 0, 0.5);}
+
 </style>
+
+ 

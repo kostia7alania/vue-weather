@@ -41,19 +41,6 @@ export const VuexMixin = {
             } else {
                 console.warn("localStorage isn't support!");
             }
-        },
-
-        setVuex() {
-            if (localStorage) {
-                localStorage.setItem('VuexStore', JSON.stringify({
-                    ...this.$store.state,
-                    favorites: {
-                        ...this.$store.state.favorites
-                    }
-                }));
-            } else {
-                console.warn("localStorage isn't support!");
-            }
         }
     }
 };
@@ -63,19 +50,6 @@ export const VuexMixin = {
 
 export const globalMixin = {
     mixins: [localDataMixin, VuexMixin],
-    data() {
-        return { }
-    },
-    methods: {
-        getTime() {
-            let d = new Date;
-            let sec = d.getSeconds();
-            sec = sec<10?'0'+sec:sec;
-            let min = d.getMinutes();
-            min = min<10?'0'+min:min;
-            return `${d.getHours()}:${min}:${sec}`;
-        }
-    },
     computed: {
         period: () => {
             let hour = (new Date).getHours();
